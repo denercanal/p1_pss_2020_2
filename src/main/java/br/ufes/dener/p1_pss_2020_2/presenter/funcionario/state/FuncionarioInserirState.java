@@ -62,7 +62,6 @@ public class FuncionarioInserirState extends FuncionarioEstados {
 
     private void viewManterFuncionarioInserir() {
         this.manterFuncionarioPresenter.getViewManterFuncionario().getjButton3().addActionListener((ActionEvent e) -> {
-            System.out.println("Inserir");
             this.inserir();
         });
     }

@@ -1,6 +1,7 @@
 package br.ufes.dener.p1_pss_2020_2.presenter.funcionario.command;
 
 import br.ufes.dener.p1_pss_2020_2.collection.FuncionarioCollection;
+import br.ufes.dener.p1_pss_2020_2.log.Logger;
 import br.ufes.dener.p1_pss_2020_2.model.Funcionario;
 import br.ufes.dener.p1_pss_2020_2.view.funcionario.ViewBuscarFuncionario;
 import br.ufes.dener.p1_pss_2020_2.view.funcionario.ViewManterFuncionario;
@@ -25,6 +26,8 @@ public class FuncionarioCommand {
                 } else {
                     for (Funcionario funcionario : funcionarios) {
                         model.addRow(new Object[]{funcionario.getId(), funcionario.getNome(), funcionario.getIdade(), funcionario.getCargo(), funcionario.getSalario()});
+                        String tipo = "BUSCADO GET ALL!";
+                        Logger.salvarLog(funcionario, tipo);
                     }
                 }
             } catch (Exception e) {
@@ -37,6 +40,17 @@ public class FuncionarioCommand {
         public ExecutarInserir(ViewManterFuncionario viewManterFuncionario) {
             Funcionario funcionario = new Funcionario();
 
+            getDados(viewManterFuncionario, funcionario);
+
+            FuncionarioCollection.getFuncionarioCollection().adicionarFuncionario(funcionario);
+
+            String tipo = "INSERIDO!";
+            Logger.salvarLog(funcionario, tipo);
+
+        }
+
+        private Funcionario getDados(ViewManterFuncionario viewManterFuncionario, Funcionario funcionario) {
+
             var cargo = viewManterFuncionario.getjComboBox1().getSelectedItem().toString();
             var nome = viewManterFuncionario.getjTextField2().getText();
             var idade = viewManterFuncionario.getjTextField3().getText();
@@ -70,8 +84,7 @@ public class FuncionarioCommand {
             if (admissao != null) {
                 funcionario.setAdmissao(LocalDate.parse(admissao, DateTimeFormatter.ofPattern("dd/MM/yyyy")));
             }
-
-            FuncionarioCollection.getFuncionarioCollection().adicionarFuncionario(funcionario);
+            return funcionario;
         }
     }
 
@@ -80,6 +93,16 @@ public class FuncionarioCommand {
         public ExecutarEditar(ViewManterFuncionario viewManterFuncionario) {
             Funcionario funcionario = new Funcionario();
 
+            this.getDados(viewManterFuncionario, funcionario);
+
+            FuncionarioCollection.getFuncionarioCollection().atualizarFuncionario(funcionario.getId(), funcionario);
+
+            String tipo = "EDITADO!";
+            Logger.salvarLog(funcionario, tipo);
+        }
+
+        private Funcionario getDados(ViewManterFuncionario viewManterFuncionario, Funcionario funcionario) {
+
             var cargo = viewManterFuncionario.getjComboBox1().getSelectedItem().toString();
             var nome = viewManterFuncionario.getjTextField2().getText();
             var idade = viewManterFuncionario.getjTextField3().getText();
@@ -113,8 +136,7 @@ public class FuncionarioCommand {
             if (admissao != null) {
                 funcionario.setAdmissao(LocalDate.parse(admissao, DateTimeFormatter.ofPattern("dd/MM/yyyy")));
             }
-
-            FuncionarioCollection.getFuncionarioCollection().atualizarFuncionario(funcionario.getId(), funcionario);
+            return funcionario;
         }
     }
 
@@ -123,7 +145,13 @@ public class FuncionarioCommand {
         public ExecutarExcluir(ViewManterFuncionario viewManterFuncionario) {
 
             try {
+                var nome = viewManterFuncionario.getjTextField2().getText().toString();
+                var funcionario = FuncionarioCollection.getFuncionarioCollection().getFuncionarioByNome(nome);
+
+                String tipo = "DELETADO!";
+                Logger.salvarLog(funcionario, tipo);
                 FuncionarioCollection.getFuncionarioCollection().removerFuncionario(viewManterFuncionario.getjTextField2().getText().toString());
+
             } catch (Exception ex) {
 
             }
@@ -143,6 +171,8 @@ public class FuncionarioCommand {
             } else {
                 var funcionario = FuncionarioCollection.getFuncionarioCollection().getFuncionarioByNome(busca);
                 model.addRow(new Object[]{funcionario.getId(), funcionario.getNome(), funcionario.getIdade(), funcionario.getCargo(), funcionario.getSalario()});
+                String tipo = "BUSCADO POR TEXTO!";
+                Logger.salvarLog(funcionario, tipo);
             }
         }
     }

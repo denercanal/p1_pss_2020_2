@@ -57,7 +57,6 @@ public class FuncionarioEditarState extends FuncionarioEstados {
 
     private void viewManterFuncionarioEditar() {
         this.manterFuncionarioPresenter.getViewManterFuncionario().getjButton4().addActionListener((ActionEvent e) -> {
-            System.out.println("Editar");
             this.editar();
         });
     }
