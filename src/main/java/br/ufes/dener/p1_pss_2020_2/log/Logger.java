@@ -26,21 +26,21 @@ public class Logger {
 
         LogConfig.getJsonArray().put(jsonObject);
         LogConfig.getXmlArray().append("<log>").append(xml).append("</log>");
-        LogConfig.getTxtArray().add(xml);
+        LogConfig.getTxtArray().add(jsonObject.toString());
 
         try {
             Path currentRelativePath = Paths.get("");
-            String s = currentRelativePath.toAbsolutePath().toString();
+            String path = currentRelativePath.toAbsolutePath().toString();
 
-            FileWriter fileJson = new FileWriter(s + "/src/main/java/br/ufes/dener/p1_pss_2020_2/log/storage/log.json");
+            FileWriter fileJson = new FileWriter(path + "/src/main/java/br/ufes/dener/p1_pss_2020_2/log/storage/log.json");
             fileJson.write(LogConfig.getJsonArray().toString());
             fileJson.close();
 
-            FileWriter fileXml = new FileWriter(s + "/src/main/java/br/ufes/dener/p1_pss_2020_2/log/storage/log.xml");
+            FileWriter fileXml = new FileWriter(path + "/src/main/java/br/ufes/dener/p1_pss_2020_2/log/storage/log.xml");
             fileXml.write(LogConfig.getXmlArray().toString());
             fileXml.close();
 
-            FileWriter fileTxt = new FileWriter(s + "/src/main/java/br/ufes/dener/p1_pss_2020_2/log/storage/log.txt");
+            FileWriter fileTxt = new FileWriter(path + "/src/main/java/br/ufes/dener/p1_pss_2020_2/log/storage/log.txt");
             fileTxt.write(LogConfig.getTxtArray().toString());
             fileTxt.close();
 
