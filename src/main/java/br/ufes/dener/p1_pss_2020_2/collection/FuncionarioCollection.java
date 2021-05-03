@@ -113,4 +113,13 @@ public class FuncionarioCollection extends FuncionarioObservado {
     public int getTotalFuncionarios() {
         return this.funcionarios.size();
     }
+
+    public Funcionario getFuncionarioByBonus(String bonus) {
+        for (Funcionario funcionario : funcionarios) {
+            if (funcionario.getBonus() == bonus) {
+                return funcionario;
+            }
+        }
+        return null;
+    }
 }

@@ -14,12 +14,14 @@ public class Funcionario {
     private Boolean funcionarioDoMes;
     private LocalDate admissao;
     private double salarioFinal;
+    private double valorBonus;
+    private LocalDate dataBonus;
 
     public Funcionario() {
 
     }
 
-    public Funcionario(int id, String nome, int idade, double salario, String cargo, String bonus, int faltas, Boolean funcionarioDoMes, LocalDate admissao, double salarioFinal) {
+    public Funcionario(int id, String nome, int idade, double salario, String cargo, String bonus, int faltas, Boolean funcionarioDoMes, LocalDate admissao, double salarioFinal, double valorBonus, LocalDate dataBonus) {
         this.id = id;
         this.nome = nome;
         this.idade = idade;
@@ -30,6 +32,8 @@ public class Funcionario {
         this.funcionarioDoMes = funcionarioDoMes;
         this.admissao = admissao;
         this.salarioFinal = salarioFinal;
+        this.valorBonus = valorBonus;
+        this.dataBonus = dataBonus;
     }
 
     public int getId() {
@@ -112,4 +116,19 @@ public class Funcionario {
         this.salarioFinal = salarioFinal;
     }
 
+    public double getValorBonus() {
+        return valorBonus;
+    }
+
+    public void setValorBonus(double valorBonus) {
+        this.valorBonus = valorBonus;
+    }
+
+    public LocalDate getDataBonus() {
+        return this.getAdmissao();
+    }
+
+    public void setDataBonus(LocalDate dataBonus) {
+        this.dataBonus = dataBonus;
+    }
 }

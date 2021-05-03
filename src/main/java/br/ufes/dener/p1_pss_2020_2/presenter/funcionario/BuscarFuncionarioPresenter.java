@@ -89,12 +89,20 @@ public class BuscarFuncionarioPresenter {
     private void viewBuscarFuncionarioVerBonus() {
         this.viewBuscarFuncionario.getjButton4().addActionListener((ActionEvent e) -> {
             System.out.println("Ver Bonus");
-            try {
-                VerBonusPresenter verBonusPresenter = new VerBonusPresenter(new Frame(), true);
-                verBonusPresenter.viewVerBonusModal();
-            } catch (Exception ex) {
+            if (viewBuscarFuncionario.getjTable1().getRowCount() <= 0) {
+                JOptionPane.showMessageDialog(null, "Favor cadastrar ou selecionar uma linha!");
+            } else {
+                try {
+                    var linhaSelecionada = viewBuscarFuncionario.getjTable1().getSelectedRow();
+                    var idFuncionario = viewBuscarFuncionario.getjTable1().getValueAt(linhaSelecionada, 0);
+                    var funcionario = FuncionarioCollection.getFuncionarioCollection().getFuncionarioById((int) idFuncionario);
+                    VerBonusPresenter verBonusPresenter = new VerBonusPresenter(new Frame(), true, funcionario);
+                    verBonusPresenter.viewVerBonusModal();
+                } catch (Exception ex) {
 
+                }
             }
+
         });
     }
 

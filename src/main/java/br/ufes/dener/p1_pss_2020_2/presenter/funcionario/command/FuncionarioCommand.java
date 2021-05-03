@@ -1,8 +1,10 @@
 package br.ufes.dener.p1_pss_2020_2.presenter.funcionario.command;
 
 import br.ufes.dener.p1_pss_2020_2.collection.FuncionarioCollection;
+import br.ufes.dener.p1_pss_2020_2.collection.TipoBonusCollection;
 import br.ufes.dener.p1_pss_2020_2.log.Logger;
 import br.ufes.dener.p1_pss_2020_2.model.Funcionario;
+import br.ufes.dener.p1_pss_2020_2.model.TipoBonus;
 import br.ufes.dener.p1_pss_2020_2.view.funcionario.ViewBuscarFuncionario;
 import br.ufes.dener.p1_pss_2020_2.view.funcionario.ViewManterFuncionario;
 import java.time.LocalDate;
@@ -49,6 +51,12 @@ public class FuncionarioCommand {
 
             FuncionarioCollection.getFuncionarioCollection().adicionarFuncionario(funcionario);
 
+            if (funcionario.getBonus().equalsIgnoreCase(TipoBonus.NORMAL.toString())) {
+                TipoBonusCollection.getTipoBonusCollection().inserirBonus(funcionario.getId(), funcionario.getBonus());
+            } else if (funcionario.getBonus().equalsIgnoreCase(TipoBonus.GENEROSO.toString())) {
+                TipoBonusCollection.getTipoBonusCollection().inserirBonus(funcionario.getId(), funcionario.getBonus());
+            }
+
             if (funcionario == null) {
                 Logger.salvarLog(null, "ErroInserir");
             } else {
@@ -92,6 +100,12 @@ public class FuncionarioCommand {
             if (admissao != null) {
                 funcionario.setAdmissao(LocalDate.parse(admissao, DateTimeFormatter.ofPattern("dd/MM/yyyy")));
             }
+            if (TipoBonus.GENEROSO.getDescription().equalsIgnoreCase(bonus)) {
+                funcionario.setValorBonus(32);
+            }
+            if (TipoBonus.NORMAL.getDescription().equalsIgnoreCase(bonus)) {
+                funcionario.setValorBonus(8);
+            }
             return funcionario;
         }
     }
@@ -104,6 +118,12 @@ public class FuncionarioCommand {
             this.getDados(viewManterFuncionario, funcionario);
 
             FuncionarioCollection.getFuncionarioCollection().atualizarFuncionario(funcionario.getId(), funcionario);
+
+            if (funcionario.getBonus().equalsIgnoreCase(TipoBonus.NORMAL.toString())) {
+                TipoBonusCollection.getTipoBonusCollection().inserirBonus(funcionario.getId(), funcionario.getBonus());
+            } else if (funcionario.getBonus().equalsIgnoreCase(TipoBonus.GENEROSO.toString())) {
+                TipoBonusCollection.getTipoBonusCollection().inserirBonus(funcionario.getId(), funcionario.getBonus());
+            }
 
             if (funcionario == null) {
                 Logger.salvarLog(null, "ErroEditar");
@@ -147,6 +167,12 @@ public class FuncionarioCommand {
             }
             if (admissao != null) {
                 funcionario.setAdmissao(LocalDate.parse(admissao, DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+            }
+            if (TipoBonus.GENEROSO.getDescription().equalsIgnoreCase(bonus)) {
+                funcionario.setValorBonus(32);
+            }
+            if (TipoBonus.NORMAL.getDescription().equalsIgnoreCase(bonus)) {
+                funcionario.setValorBonus(8);
             }
             return funcionario;
         }
