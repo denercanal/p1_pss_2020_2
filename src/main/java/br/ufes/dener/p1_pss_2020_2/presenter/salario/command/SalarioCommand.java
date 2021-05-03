@@ -25,7 +25,16 @@ public class SalarioCommand {
                 var funcionarios = FuncionarioCollection.getFuncionarioCollection().getFuncionariosByData(data);
 
                 for (Funcionario funcionario : funcionarios) {
-                    model.addRow(new Object[]{funcionario.getNome().toString(), funcionario.getAdmissao().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), funcionario.getSalario(), funcionario.getBonus(), funcionario.getSalarioFinal()});
+
+                    var x = funcionario.getBonus();
+
+                    if (x.equalsIgnoreCase("generoso")) {
+                        funcionario.setSalarioFinal(funcionario.getSalario() + (funcionario.getSalario() * 0.2));
+                    } else {
+                        funcionario.setSalarioFinal(funcionario.getSalario() + (funcionario.getSalario() * 0.1));
+                    }
+
+                    model.addRow(new Object[]{funcionario.getNome().toString(), funcionario.getAdmissao().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), funcionario.getSalario(), "[ " + x + " ]", funcionario.getSalarioFinal()});
                     if (funcionario == null) {
                         Logger.salvarLog(null, "GetByDATA");
                     } else {
@@ -51,7 +60,14 @@ public class SalarioCommand {
                     JOptionPane.showMessageDialog(null, "Sem Funcionarios Cadastrados!");
                 } else {
                     for (Funcionario funcionario : funcionarios) {
-                        model.addRow(new Object[]{funcionario.getNome().toString(), funcionario.getAdmissao().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), funcionario.getSalario(), funcionario.getBonus(), funcionario.getSalarioFinal()});
+                        var x = funcionario.getBonus();
+
+                        if (x.equalsIgnoreCase("generoso")) {
+                            funcionario.setSalarioFinal(funcionario.getSalario() + (funcionario.getSalario() * 0.2));
+                        } else {
+                            funcionario.setSalarioFinal(funcionario.getSalario() + (funcionario.getSalario() * 0.1));
+                        }
+                        model.addRow(new Object[]{funcionario.getNome().toString(), funcionario.getAdmissao().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), funcionario.getSalario(), "[ " + x + " ]", funcionario.getSalarioFinal()});
                         if (funcionario == null) {
                             Logger.salvarLog(null, "ErroGetAll");
                         } else {

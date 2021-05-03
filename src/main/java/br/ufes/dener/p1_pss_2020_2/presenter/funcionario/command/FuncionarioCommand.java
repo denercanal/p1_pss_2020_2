@@ -3,13 +3,10 @@ package br.ufes.dener.p1_pss_2020_2.presenter.funcionario.command;
 import br.ufes.dener.p1_pss_2020_2.collection.FuncionarioCollection;
 import br.ufes.dener.p1_pss_2020_2.log.Logger;
 import br.ufes.dener.p1_pss_2020_2.model.Funcionario;
-import br.ufes.dener.p1_pss_2020_2.model.TipoBonus;
 import br.ufes.dener.p1_pss_2020_2.view.funcionario.ViewBuscarFuncionario;
 import br.ufes.dener.p1_pss_2020_2.view.funcionario.ViewManterFuncionario;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -65,10 +62,7 @@ public class FuncionarioCommand {
             var cargo = viewManterFuncionario.getjComboBox1().getSelectedItem().toString();
             var nome = viewManterFuncionario.getjTextField2().getText();
             var idade = viewManterFuncionario.getjTextField3().getText();
-            List<String> bonus = new ArrayList<>();
-            if (viewManterFuncionario.getjComboBox2().getSelectedItem().toString().equals(TipoBonus.NORMAL)) {
-                bonus.add(viewManterFuncionario.getjComboBox2().getSelectedItem().toString());
-            }
+            var bonus = viewManterFuncionario.getjComboBox2().getSelectedItem().toString();
             var salario = viewManterFuncionario.getjTextField4().getText();
             var faltas = viewManterFuncionario.getjTextField5().getText();
             var funcionarioDoMes = viewManterFuncionario.getjCheckBox1().isSelected();
@@ -124,10 +118,7 @@ public class FuncionarioCommand {
             var cargo = viewManterFuncionario.getjComboBox1().getSelectedItem().toString();
             var nome = viewManterFuncionario.getjTextField2().getText();
             var idade = viewManterFuncionario.getjTextField3().getText();
-            List<String> bonus = new ArrayList<>();
-            if (viewManterFuncionario.getjComboBox2().getSelectedItem().toString().equals(TipoBonus.NORMAL)) {
-                bonus.add(viewManterFuncionario.getjComboBox2().getSelectedItem().toString());
-            }
+            var bonus = viewManterFuncionario.getjComboBox2().getSelectedItem().toString();
             var salario = viewManterFuncionario.getjTextField4().getText();
             var faltas = viewManterFuncionario.getjTextField5().getText();
             var funcionarioDoMes = viewManterFuncionario.getjCheckBox1().isSelected();
