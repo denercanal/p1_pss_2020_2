@@ -109,7 +109,7 @@ public class ViewTelaPrincipal extends javax.swing.JFrame {
 
         jMenu3.setText("Ferramentas");
 
-        jMenu4.setText("jMenu4");
+        jMenu4.setText("ConfigLog");
         jMenu3.add(jMenu4);
 
         jMenuBar1.add(jMenu3);
@@ -253,7 +253,6 @@ public class ViewTelaPrincipal extends javax.swing.JFrame {
     public void setjMenu4(JMenu jMenu4) {
         this.jMenu4 = jMenu4;
     }
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> jComboBox1;

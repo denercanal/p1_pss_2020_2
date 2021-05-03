@@ -5,11 +5,11 @@ import java.util.stream.Collectors;
 
 public enum TipoBonus {
 
-    PÉSSIMO(1, "Bonus Péssimo"),
+    PESSIMO(1, "Bonus Péssimo"),
     RUIM(2, "Bonus Ruim"),
     REGULAR(3, "Bonus Regular"),
     BOM(4, "Bonus Bom"),
-    ÓTIMO(5, "Bonus Ótimo"),
+    OTIMO(5, "Bonus Ótimo"),
     NORMAL(6, "Bonus Normal"),
     GENEROSO(7, "Bonus Generoso");
 
@@ -22,7 +22,7 @@ public enum TipoBonus {
     }
 
     public static TipoBonus getPÉSSIMO() {
-        return PÉSSIMO;
+        return PESSIMO;
     }
 
     public static TipoBonus getRUIM() {
@@ -38,7 +38,7 @@ public enum TipoBonus {
     }
 
     public static TipoBonus getÓTIMO() {
-        return ÓTIMO;
+        return OTIMO;
     }
 
     public static TipoBonus getNORMAL() {

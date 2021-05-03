@@ -22,6 +22,10 @@ public class TelaPrincipalPresenter implements IFuncionarioObserver {
     public void viewTelaPrincipal() {
         this.viewTelaPrincipal.setVisible(true);
     }
+    
+    public ViewTelaPrincipal getViewTelaPrincipal() {
+        return this.viewTelaPrincipal;
+    }
 
     private void viewBuscarFuncionario() {
         viewTelaPrincipal.getjMenuItem1().addActionListener((ActionEvent arg0) -> {

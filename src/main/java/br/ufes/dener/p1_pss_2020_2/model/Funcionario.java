@@ -1,6 +1,7 @@
 package br.ufes.dener.p1_pss_2020_2.model;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class Funcionario {
 
@@ -9,16 +10,17 @@ public class Funcionario {
     private int idade;
     private double salario;
     private String cargo;
-    private String bonus;
+    private List<String> bonus;
     private int faltas;
     private Boolean funcionarioDoMes;
     private LocalDate admissao;
+    private double salarioFinal;
 
     public Funcionario() {
 
     }
 
-    public Funcionario(int id, String nome, int idade, double salario, String cargo, String bonus, int faltas, Boolean funcionarioDoMes, LocalDate admissao) {
+    public Funcionario(int id, String nome, int idade, double salario, String cargo, List<String> bonus, int faltas, Boolean funcionarioDoMes, LocalDate admissao, double salarioFinal) {
         this.id = id;
         this.nome = nome;
         this.idade = idade;
@@ -28,6 +30,7 @@ public class Funcionario {
         this.faltas = faltas;
         this.funcionarioDoMes = funcionarioDoMes;
         this.admissao = admissao;
+        this.salarioFinal = salarioFinal;
     }
 
     public int getId() {
@@ -70,11 +73,11 @@ public class Funcionario {
         this.cargo = cargo;
     }
 
-    public String getBonus() {
+    public List<String> getBonus() {
         return bonus;
     }
 
-    public void setBonus(String bonus) {
+    public void setBonus(List<String> bonus) {
         this.bonus = bonus;
     }
 
@@ -100,6 +103,14 @@ public class Funcionario {
 
     public void setAdmissao(LocalDate admissao) {
         this.admissao = admissao;
+    }
+
+    public double getSalarioFinal() {
+        return salarioFinal;
+    }
+
+    public void setSalarioFinal(double salarioFinal) {
+        this.salarioFinal = salarioFinal;
     }
 
 }
