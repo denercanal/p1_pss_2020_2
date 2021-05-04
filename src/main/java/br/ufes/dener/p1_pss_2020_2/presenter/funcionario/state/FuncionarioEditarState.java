@@ -1,8 +1,9 @@
 package br.ufes.dener.p1_pss_2020_2.presenter.funcionario.state;
 
 import br.ufes.dener.p1_pss_2020_2.presenter.funcionario.ManterFuncionarioPresenter;
-import br.ufes.dener.p1_pss_2020_2.presenter.funcionario.command.FuncionarioCommand;
+import br.ufes.dener.p1_pss_2020_2.presenter.funcionario.command.FuncionarioEditarCommand;
 import java.awt.event.ActionEvent;
+import javax.swing.JOptionPane;
 
 public class FuncionarioEditarState extends FuncionarioEstados {
 
@@ -21,11 +22,16 @@ public class FuncionarioEditarState extends FuncionarioEstados {
 
     @Override
     public void editar() {
-        new FuncionarioCommand.ExecutarEditar(this.manterFuncionarioPresenter.getViewManterFuncionario());
         try {
+            new FuncionarioEditarCommand().executarEditar(this.manterFuncionarioPresenter.getViewManterFuncionario());
             manterFuncionarioPresenter.setEstado(new FuncionarioVisualizarState(this.manterFuncionarioPresenter));
+            
+            var nome = this.manterFuncionarioPresenter.getViewManterFuncionario().getjTextField2().getText();
+            JOptionPane.showMessageDialog(this.manterFuncionarioPresenter.getViewManterFuncionario(), nome + " Editado!");
+
             this.manterFuncionarioPresenter.getViewManterFuncionario().dispose();
         } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this.manterFuncionarioPresenter.getViewManterFuncionario(), ex.getMessage(), "ERRO!", JOptionPane.OK_OPTION);
         }
     }
 

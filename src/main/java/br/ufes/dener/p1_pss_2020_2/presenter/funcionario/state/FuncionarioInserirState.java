@@ -1,10 +1,9 @@
 package br.ufes.dener.p1_pss_2020_2.presenter.funcionario.state;
 
 import br.ufes.dener.p1_pss_2020_2.presenter.funcionario.ManterFuncionarioPresenter;
-import br.ufes.dener.p1_pss_2020_2.presenter.funcionario.command.FuncionarioCommand;
+import br.ufes.dener.p1_pss_2020_2.presenter.funcionario.command.FuncionarioInserirCommand;
 import java.awt.event.ActionEvent;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class FuncionarioInserirState extends FuncionarioEstados {
 
@@ -24,12 +23,13 @@ public class FuncionarioInserirState extends FuncionarioEstados {
 
     @Override
     public void inserir() {
-        new FuncionarioCommand.ExecutarInserir(this.manterFuncionarioPresenter.getViewManterFuncionario());
         try {
+            new FuncionarioInserirCommand().executarInserir(this.manterFuncionarioPresenter.getViewManterFuncionario());
             this.manterFuncionarioPresenter.setEstado(new FuncionarioVisualizarState(this.manterFuncionarioPresenter));
         } catch (Exception ex) {
-            Logger.getLogger(FuncionarioInserirState.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this.manterFuncionarioPresenter.getViewManterFuncionario(), ex.getMessage(), "ERRO!", JOptionPane.OK_OPTION);
         }
+
     }
 
     @Override

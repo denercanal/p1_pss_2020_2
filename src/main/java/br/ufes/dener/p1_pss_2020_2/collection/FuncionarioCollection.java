@@ -98,7 +98,7 @@ public class FuncionarioCollection extends FuncionarioObservado {
         List<Funcionario> funcionariosPeriodoSelecionado = new ArrayList<>();
 
         if (funcionarios.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Sem funcionarios no período!");
+            throw new Exception("Sem funcionarios no período!");
         } else {
             for (Funcionario funcionario : funcionarios) {
                 if (data.equals(funcionario.getAdmissao())) {
@@ -107,7 +107,6 @@ public class FuncionarioCollection extends FuncionarioObservado {
             }
             return funcionariosPeriodoSelecionado;
         }
-        return null;
     }
 
     public int getTotalFuncionarios() {

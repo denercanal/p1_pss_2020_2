@@ -1,9 +1,10 @@
 package br.ufes.dener.p1_pss_2020_2.presenter.funcionario.state;
 
 import br.ufes.dener.p1_pss_2020_2.presenter.funcionario.ManterFuncionarioPresenter;
-import br.ufes.dener.p1_pss_2020_2.presenter.funcionario.command.FuncionarioCommand;
+import br.ufes.dener.p1_pss_2020_2.presenter.funcionario.command.FuncionarioExcluirCommand;
 import java.awt.event.ActionEvent;
 import java.time.format.DateTimeFormatter;
+import javax.swing.JOptionPane;
 
 public class FuncionarioVisualizarState extends FuncionarioEstados {
 
@@ -14,7 +15,7 @@ public class FuncionarioVisualizarState extends FuncionarioEstados {
 
         this.manterFuncionarioPresenter = manterFuncionarioPresenter;
         this.manterFuncionarioPresenter.removerListeners();
-        
+
         this.viewManterFuncionarioOptions();
         this.viewManterFuncionarioVisualizar();
         this.viewManterFuncionarioFechar();
@@ -29,8 +30,16 @@ public class FuncionarioVisualizarState extends FuncionarioEstados {
 
     @Override
     public void excluir() {
-        new FuncionarioCommand.ExecutarExcluir(this.manterFuncionarioPresenter.getViewManterFuncionario());
-        this.manterFuncionarioPresenter.getViewManterFuncionario().dispose();
+        try {
+            new FuncionarioExcluirCommand().executarExcluir(this.manterFuncionarioPresenter.getViewManterFuncionario());
+
+            var nome = this.manterFuncionarioPresenter.getViewManterFuncionario().getjTextField2().getText();
+            JOptionPane.showMessageDialog(this.manterFuncionarioPresenter.getViewManterFuncionario(), nome + " Excluído!");
+
+            this.manterFuncionarioPresenter.getViewManterFuncionario().dispose();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this.manterFuncionarioPresenter.getViewManterFuncionario(), e.getMessage(), "ERRO!", JOptionPane.OK_OPTION);
+        }
     }
 
     @Override

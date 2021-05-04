@@ -1,14 +1,13 @@
 package br.ufes.dener.p1_pss_2020_2.presenter.funcionario;
 
 import br.ufes.dener.p1_pss_2020_2.collection.FuncionarioCollection;
-import br.ufes.dener.p1_pss_2020_2.presenter.funcionario.command.FuncionarioCommand;
+import br.ufes.dener.p1_pss_2020_2.presenter.funcionario.command.FuncionarioGetAllCommand;
+import br.ufes.dener.p1_pss_2020_2.presenter.funcionario.command.FuncionarioGetByNomeCommand;
 import br.ufes.dener.p1_pss_2020_2.presenter.funcionario.modal.VerBonusPresenter;
 import br.ufes.dener.p1_pss_2020_2.view.funcionario.ViewBuscarFuncionario;
 import br.ufes.dener.p1_pss_2020_2.view.telaprincipal.ViewTelaPrincipal;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class BuscarFuncionarioPresenter {
@@ -42,16 +41,16 @@ public class BuscarFuncionarioPresenter {
             System.out.println("buscar");
             if (this.viewBuscarFuncionario.getjTextField1().getText().isBlank()) {
                 try {
-                    new FuncionarioCommand.ExecutarGetAll(this.getViewBuscarFuncionario());
+                    new FuncionarioGetAllCommand().executarGetAll(this.getViewBuscarFuncionario());
                 } catch (Exception ex) {
-                    Logger.getLogger(BuscarFuncionarioPresenter.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(this.getViewBuscarFuncionario(), ex.getMessage(), "ERRO!", JOptionPane.OK_OPTION);
                 }
             } else {
                 try {
                     var busca = this.viewBuscarFuncionario.getjTextField1().getText().toString();
-                    new FuncionarioCommand.ExecutarGetByNome(this.getViewBuscarFuncionario(), busca);
+                    new FuncionarioGetByNomeCommand().executarGetByNome(this.getViewBuscarFuncionario(), busca);
                 } catch (Exception ex) {
-
+                    JOptionPane.showMessageDialog(this.getViewBuscarFuncionario(), ex.getMessage(), "ERRO!", JOptionPane.OK_OPTION);
                 }
             }
 

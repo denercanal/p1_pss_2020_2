@@ -1,13 +1,13 @@
 package br.ufes.dener.p1_pss_2020_2.presenter.salario;
 
-import br.ufes.dener.p1_pss_2020_2.presenter.salario.command.SalarioCommand;
+import br.ufes.dener.p1_pss_2020_2.presenter.salario.command.SalarioGetAllCommand;
+import br.ufes.dener.p1_pss_2020_2.presenter.salario.command.SalarioGetByDataCommand;
 import br.ufes.dener.p1_pss_2020_2.view.salario.ViewCalcularSalario;
 import br.ufes.dener.p1_pss_2020_2.view.telaprincipal.ViewTelaPrincipal;
 import java.awt.event.ActionEvent;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class CalcularSalarioPresenter {
 
@@ -38,8 +38,12 @@ public class CalcularSalarioPresenter {
             System.out.println("Buscar");
             var data = this.viewCalcularSalario.getjFormattedTextField1().getText();
             try {
-                new SalarioCommand.ExecutarGetByData(this.viewCalcularSalario, LocalDate.parse(data, DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+                if (data.equals("  /  /    ")) {
+                    throw new Exception("Data vazia!");
+                }
+                new SalarioGetByDataCommand().executarGetByData(this.viewCalcularSalario, LocalDate.parse(data, DateTimeFormatter.ofPattern("dd/MM/yyyy")));
             } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this.getViewCalcularSalario(), ex.getMessage(), "ERRO!", JOptionPane.OK_OPTION);
             }
         });
     }
@@ -48,9 +52,9 @@ public class CalcularSalarioPresenter {
         this.viewCalcularSalario.getjButton2().addActionListener((ActionEvent arg0) -> {
             System.out.println("Listar Todos");
             try {
-                new SalarioCommand.ExecutarGetAll(this.viewCalcularSalario);
+                new SalarioGetAllCommand().executarGetAll(this.viewCalcularSalario);
             } catch (Exception ex) {
-                Logger.getLogger(CalcularSalarioPresenter.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this.getViewCalcularSalario(), ex.getMessage(), "ERRO!", JOptionPane.OK_OPTION);
             }
         });
     }
